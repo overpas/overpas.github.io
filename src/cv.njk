@@ -1,0 +1,85 @@
+---
+layout: base.njk
+title: CV
+permalink: /cv/
+---
+{%- from "icons.njk" import icon -%}
+<section class="cv-head">
+  <div class="cv-head__name">
+    <h1 class="page-title">{{ site.name }}</h1>
+    <p class="cv-head__role">{{ site.role }} · {{ site.location }}</p>
+  </div>
+  {%- if cv.pdf %}
+  <a class="button-outline" href="{{ cv.pdf }}" download>{{ icon("download", 16) }}Download PDF</a>
+  {%- endif %}
+</section>
+
+{%- if cv.summary %}
+<section class="cv-section" aria-labelledby="cv-summary">
+  <h2 id="cv-summary" class="label">Summary</h2>
+  <div class="cv-section__body">
+    <p class="cv-summary">{{ cv.summary }}</p>
+  </div>
+</section>
+{%- endif %}
+
+{%- if cv.experience and cv.experience.length %}
+<section class="cv-section" aria-labelledby="cv-exp">
+  <h2 id="cv-exp" class="label">Experience</h2>
+  <div class="cv-section__body cv-jobs">
+    {%- for job in cv.experience %}
+    <article class="cv-item">
+      <div class="cv-item__top">
+        <h3 class="cv-item__title">{{ job.title }} · <span class="cv-item__org">{{ job.company }}</span></h3>
+        <span class="cv-item__dates">{{ job.start }} – {{ job.end or "Present" }}</span>
+      </div>
+      {%- if job.location %}<p class="cv-item__where">{{ job.location }}</p>{% endif %}
+      {%- if job.highlights and job.highlights.length %}
+      <ul>
+        {%- for h in job.highlights %}<li>{{ h }}</li>{% endfor %}
+      </ul>
+      {%- endif %}
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if cv.education and cv.education.length %}
+<section class="cv-section" aria-labelledby="cv-edu">
+  <h2 id="cv-edu" class="label">Education</h2>
+  <div class="cv-section__body cv-edu">
+    {%- for e in cv.education %}
+    <div class="cv-item">
+      <div class="cv-item__top">
+        <h3 class="cv-item__title">{{ e.degree }}</h3>
+        <span class="cv-item__dates">{{ e.start }} – {{ e.end }}</span>
+      </div>
+      <p class="cv-item__school">{{ e.school }}</p>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if cv.skills and cv.skills.length %}
+<section class="cv-section" aria-labelledby="cv-skills">
+  <h2 id="cv-skills" class="label">Skills</h2>
+  <dl class="cv-section__body cv-dl">
+    {%- for s in cv.skills %}
+    <div><dt>{{ s.area }}</dt><dd>{{ s.items | join(", ") }}</dd></div>
+    {%- endfor %}
+  </dl>
+</section>
+{%- endif %}
+
+{%- if cv.languages and cv.languages.length %}
+<section class="cv-section" aria-labelledby="cv-lang">
+  <h2 id="cv-lang" class="label">Languages</h2>
+  <dl class="cv-section__body cv-dl">
+    {%- for l in cv.languages %}
+    <div><dt>{{ l.language }}</dt><dd>{{ l.level }}</dd></div>
+    {%- endfor %}
+  </dl>
+</section>
+{%- endif %}

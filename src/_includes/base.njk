@@ -1,0 +1,83 @@
+{%- from "icons.njk" import icon -%}
+{%- set pageTitle = (title + " — " + site.name) if title else site.name -%}
+{%- set pageDescription = description or summary or site.description -%}
+{%- set navItems = [
+  { url: "/", label: site.name },
+  { url: "/projects/", label: "Projects" },
+  { url: "/blog/", label: "Blog" },
+  { url: "/cv/", label: "CV" }
+] -%}
+<!doctype html>
+<html lang="{{ site.lang or 'en' }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDescription }}">
+<link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}">
+<meta property="og:type" content="{{ 'article' if layout == 'post.njk' else 'website' }}">
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ pageDescription }}">
+<meta property="og:url" content="{{ page.url | absoluteUrl(site.url) }}">
+<meta name="color-scheme" content="light dark">
+<script>
+  (function () {
+    var t;
+    try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }} — Writing" href="/feed.xml">
+<script src="/js/theme.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="container" id="top">
+
+<header class="site-header">
+  <nav class="site-nav" aria-label="Main">
+    {%- for item in navItems %}
+    {%- if page.url == item.url %}
+    <a href="{{ item.url }}" aria-current="page">{{ item.label }}</a>
+    {%- elif item.url != "/" and page.url.startsWith(item.url) %}
+    <a href="{{ item.url }}" aria-current="true">{{ item.label }}</a>
+    {%- else %}
+    <a href="{{ item.url }}">{{ item.label }}</a>
+    {%- endif %}
+    {%- endfor %}
+  </nav>
+  <div class="header-tools">
+    <div class="socials">
+      {%- for s in site.socials %}
+      <a class="icon-link" href="{{ s.url }}" aria-label="{{ s.label }}" rel="me">{{ icon(s.icon) }}</a>
+      {%- endfor %}
+      {%- if site.email %}
+      <a class="icon-link" href="mailto:{{ site.email }}" aria-label="Email">{{ icon("email") }}</a>
+      {%- endif %}
+    </div>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Dark theme" aria-pressed="false" title="Switch light / dark">
+      {{ icon("sun", 18) }}{{ icon("moon", 18) }}
+    </button>
+  </div>
+</header>
+
+<main id="main">
+{{ content | safe }}
+</main>
+
+<footer class="site-footer">
+  <span>© {% currentYear %} {{ site.name }}</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+</div>
+</body>
+</html>

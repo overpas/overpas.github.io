@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Projects
+permalink: /projects/
+---
+{%- from "icons.njk" import icon -%}
+<section class="page-intro">
+  <h1 class="page-title">Projects</h1>
+  <p class="lede">{{ site.projectsIntro }}</p>
+</section>
+
+<div class="rows project-list">
+  {%- for p in collections.projects %}
+  <article class="project" id="{{ p.page.fileSlug }}">
+    <span class="project__year">{{ p.data.year }}</span>
+    <div class="project__body">
+      <h2 class="project__title">{{ p.data.title }}</h2>
+      <div class="project__desc">{{ p.content | safe }}</div>
+      {%- if p.data.tech and p.data.tech.length %}
+      <ul class="chips" aria-label="Technologies">
+        {%- for t in p.data.tech %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+      {%- endif %}
+      {%- if p.data.source or p.data.live %}
+      <div class="project__links">
+        {%- if p.data.source %}<a class="accent-link" href="{{ p.data.source }}">Source ↗</a>{% endif %}
+        {%- if p.data.live %}<a class="accent-link" href="{{ p.data.live }}">Live site ↗</a>{% endif %}
+      </div>
+      {%- endif %}
+    </div>
+  </article>
+  {%- else %}
+  <p class="empty">No projects yet.</p>
+  {%- endfor %}
+</div>

@@ -1,0 +1,31 @@
+---
+layout: base.njk
+title: Blog
+permalink: /blog/
+---
+{%- from "icons.njk" import icon -%}
+<section class="page-intro">
+  <h1 class="page-title">Writing</h1>
+  <p class="lede">{{ site.blogIntro }}</p>
+  <a class="accent-link" href="/feed.xml" style="align-self: flex-start; font-size: 15px">{{ icon("rss", 16) }}RSS feed</a>
+</section>
+
+{%- for group in collections.posts | groupByYear %}
+<section class="year-group" aria-labelledby="y{{ group.year }}">
+  <h2 id="y{{ group.year }}" class="label">{{ group.year }}</h2>
+  <div class="rows">
+    {%- for post in group.items %}
+    <a class="entry" href="{{ post.url }}">
+      <time class="entry__date" datetime="{{ post.date | isoDate }}">{{ post.date | monthDay }}</time>
+      <span class="entry__text">
+        <span class="entry__title">{{ post.data.title }}</span>
+        {%- if post.data.summary %}<span class="entry__summary">{{ post.data.summary }}</span>{% endif %}
+      </span>
+      <span class="entry__time">{{ post.content | readingTime }} min</span>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
+{%- else %}
+<p class="empty">No posts yet.</p>
+{%- endfor %}

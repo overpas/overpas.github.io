@@ -1,0 +1,16 @@
+---
+layout: base.njk
+---
+<article>
+  <header class="post-header">
+    <a class="back-link" href="/blog/">← All writing</a>
+    <h1 class="page-title">{{ title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time>
+      · {{ content | readingTime }} min read
+    </p>
+  </header>
+  <div class="prose">
+{{ content | safe }}
+  </div>
+</article>
