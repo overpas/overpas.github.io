@@ -1,4 +1,3 @@
-{#- Inline stroke icons (from the design). Usage: {% from "icons.njk" import icon %}{{ icon("github") }} -#}
 {%- macro icon(name, size = 20) -%}
 <svg aria-hidden="true" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="{{ 2 if size < 18 else 1.75 }}" stroke-linecap="round" stroke-linejoin="round"
 {%- if name == "sun" %} class="icon-sun"{% elif name == "moon" %} class="icon-moon"{% endif %}>

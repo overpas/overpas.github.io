@@ -1,4 +1,3 @@
-/* ---------- Tokens ---------- */
 :root {
   --bg: #FBFBF9;
   --text: #16161A;
@@ -31,7 +30,6 @@
   color-scheme: dark;
 }
 
-/* Without JavaScript, follow the system setting. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --bg: #121214;
@@ -49,7 +47,6 @@
   }
 }
 
-/* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 
 html { -webkit-text-size-adjust: 100%; }
@@ -103,7 +100,6 @@ img, svg { max-width: 100%; }
   padding: 0 24px;
 }
 
-/* ---------- Header ---------- */
 .site-header {
   display: flex;
   flex-wrap: wrap;
@@ -167,12 +163,10 @@ img, svg { max-width: 100%; }
   cursor: pointer;
 }
 
-/* Sun shows in dark mode (switch to light), moon in light mode. */
 .theme-toggle .icon-sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
-/* ---------- Shared type ---------- */
 .mono { font-family: var(--mono); }
 
 .label {
@@ -250,7 +244,6 @@ img, svg { max-width: 100%; }
   border-top: 1px solid var(--rule);
 }
 
-/* ---------- Home ---------- */
 .hero {
   padding-top: 112px;
   display: flex;
@@ -322,7 +315,6 @@ img, svg { max-width: 100%; }
 .post-row .row-meta { flex: 0 0 112px; }
 .post-row .row-title { flex: 1 1 360px; }
 
-/* ---------- Projects ---------- */
 .project-list { margin-top: 56px; }
 
 .project {
@@ -382,7 +374,6 @@ img, svg { max-width: 100%; }
 .project__links { display: flex; flex-wrap: wrap; gap: 0 20px; }
 .project__links .accent-link { font-size: 15px; }
 
-/* ---------- Blog index ---------- */
 .year-group { padding-top: 56px; }
 .year-group .label { margin-bottom: 8px; text-transform: none; }
 
@@ -404,7 +395,6 @@ img, svg { max-width: 100%; }
 
 .empty { padding: 32px 0; color: var(--muted); }
 
-/* ---------- Post ---------- */
 .post-header {
   padding-top: 96px;
   display: flex;
@@ -474,7 +464,6 @@ img, svg { max-width: 100%; }
 .prose table { display: block; overflow-x: auto; border-collapse: collapse; font-size: 15px; }
 .prose th, .prose td { padding: 8px 12px; border-bottom: 1px solid var(--rule); text-align: left; }
 
-/* ---------- CV ---------- */
 .cv-head {
   padding-top: 112px;
   display: flex;
@@ -553,7 +542,6 @@ img, svg { max-width: 100%; }
 .cv-dl dt { flex: 0 0 120px; font-weight: 500; }
 .cv-dl dd { flex: 1 1 240px; margin: 0; line-height: 1.6; color: var(--body); }
 
-/* ---------- Footer ---------- */
 .site-footer {
   display: flex;
   flex-wrap: wrap;
@@ -574,7 +562,6 @@ img, svg { max-width: 100%; }
   text-decoration: none;
 }
 
-/* ---------- Small screens ---------- */
 @media (max-width: 560px) {
   .hero, .page-intro, .cv-head { padding-top: 72px; }
   .post-header { padding-top: 56px; }
@@ -583,7 +570,6 @@ img, svg { max-width: 100%; }
   .section { padding-top: 64px; }
 }
 
-/* ---------- Print (CV prints cleanly) ---------- */
 @media print {
   :root { --bg: #fff; --text: #000; --body: #222; --strong: #111; --muted: #555; --accent: #000; }
   .site-header, .site-footer, .button-outline, .skip-link { display: none !important; }

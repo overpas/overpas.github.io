@@ -1,5 +1,3 @@
-// Light / dark toggle. The initial theme is set by an inline script in <head>
-// (saved choice, else the system setting) so the page never flashes.
 (function () {
   var root = document.documentElement;
   var button = document.querySelector("[data-theme-toggle]");
@@ -20,7 +18,6 @@
     sync();
   });
 
-  // Follow system changes until the visitor picks a theme themselves.
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
       var saved;

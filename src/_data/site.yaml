@@ -1,7 +1,3 @@
-# Site-wide settings and the text on the Home page.
-# Replace every [placeholder] with your own details.
-
-# Full URL of the published site, no trailing slash (used for the RSS feed and link previews).
 url: "https://your-handle.github.io"
 lang: en
 
@@ -10,11 +6,9 @@ role: "[your role]"
 location: "[City, Country]"
 description: "[One sentence that describes you, used by search engines and link previews.]"
 
-# Home page
 headline: "I’m [Your Name], a [your role] based in [City]."
 intro: "[Two or three sentences about what you work on, what you care about, and what you’re open to right now.]"
 
-# The "Now" list on the Home page. Add, remove or reorder rows freely.
 now:
   - label: Currently
     value: "[Role] at [Company]"
@@ -23,12 +17,9 @@ now:
   - label: Based in
     value: "[City, Country]"
 
-# Intros on the Projects and Blog pages
 projectsIntro: "[A sentence on the kind of things you build and why.]"
 blogIntro: "[What you write about: notes on your work, things you learned, longer essays.]"
 
-# Header icon links. `icon` is one of: linkedin, github, telegram, x, link.
-# Delete a row to hide that icon.
 socials:
   - label: LinkedIn
     icon: linkedin
@@ -40,5 +31,4 @@ socials:
     icon: telegram
     url: "https://t.me/your-handle"
 
-# Shown as the envelope icon. Leave empty ("") to hide it.
 email: "you@example.com"
