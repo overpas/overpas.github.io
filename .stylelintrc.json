@@ -20,6 +20,18 @@
       {
         "message": "Expected class selector \"%s\" to be kebab-case BEM (block__element--modifier)"
       }
+    ],
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["-webkit-text-size-adjust"]
+      }
+    ],
+    "comment-word-disallowed-list": [
+      ["/./"],
+      {
+        "message": "Comments are not allowed in this project."
+      }
     ]
   }
 }

@@ -10,7 +10,6 @@ permissions:
 
 concurrency:
   group: checks-${{ github.ref }}
-  # Superseded PR runs are cancelled; runs that gate a deploy always finish.
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

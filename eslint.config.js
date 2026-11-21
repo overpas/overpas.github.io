@@ -6,34 +6,48 @@ import nodePlugin from "eslint-plugin-n";
 import unicorn from "eslint-plugin-unicorn";
 import yml from "eslint-plugin-yml";
 
-const JS_FILES = ["**/*.js"];
+const noComments = {
+  create: (context) => {
+    const reportAll = () => {
+      for (const comment of context.sourceCode.getAllComments()) {
+        context.report({ loc: comment.loc, messageId: "comment" });
+      }
+    };
+    return { Program: reportAll };
+  },
+  meta: {
+    messages: { comment: "Comments are not allowed in this project." },
+    schema: [],
+    type: "suggestion",
+  },
+};
+
+const project = { rules: { "no-comments": noComments } };
 
 export default defineConfig([
-  globalIgnores(["_site/", "node_modules/", "package-lock.json"]),
+  globalIgnores([
+    "_site/",
+    "node_modules/",
+    "package-lock.json",
+    ".claude/*",
+    "!.claude/launch.json",
+  ]),
 
-  // JavaScript: every core rule and every unicorn rule, minus the few listed below.
   {
     extends: [js.configs.all, unicorn.configs.all],
-    files: JS_FILES,
+    files: ["**/*.js"],
     linterOptions: { reportUnusedDisableDirectives: "error", reportUnusedInlineConfigs: "error" },
+    plugins: { project },
     rules: {
-      // Explanatory comments read as sentences; forcing a capital on code-like comments adds nothing.
       "capitalized-comments": "off",
-      // Conflicts with prefer-const-style declarations and makes diffs noisier.
-      "one-var": "off",
-      // Ternaries are the clearest form for short conditional values.
-      "no-ternary": "off",
-      // Object keys are ordered by meaning (e.g. Eleventy's dir, permalink), not alphabetically.
-      "sort-keys": "off",
-      // These two together forbid the standard `/** @param {T} name */` JSDoc form that TypeScript reads.
-      "unicorn/no-asterisk-prefix-in-documentation-comments": "off",
-      "unicorn/single-line-block-comment-style": "off",
-      // Literals 0 and 1 (array starts, "at least one") are clearer than named constants.
       "no-magic-numbers": ["error", { ignore: [0, 1], ignoreDefaultValues: true }],
+      "no-ternary": "off",
+      "one-var": "off",
+      "project/no-comments": "error",
+      "sort-keys": "off",
     },
   },
 
-  // Node.js files: config and data files run by Eleventy.
   {
     extends: [nodePlugin.configs["flat/recommended-module"]],
     files: [
@@ -45,22 +59,30 @@ export default defineConfig([
     languageOptions: { globals: globals.node },
   },
 
-  // Browser modules loaded with <script type="module">.
   {
     files: ["src/js/**/*.js"],
-    languageOptions: { globals: globals.browser },
+    languageOptions: { ecmaVersion: 5, globals: globals.browser, sourceType: "script" },
+    rules: {
+      "no-empty": ["error", { allowEmptyCatch: true }],
+      "no-unused-vars": ["error", { caughtErrors: "none" }],
+      "no-var": "off",
+      "prefer-arrow-callback": "off",
+      "unicorn/prefer-global-this": "off",
+      "unicorn/prefer-module": "off",
+      "unicorn/prefer-optional-catch-binding": "off",
+    },
   },
 
-  // JSON (package-lock.json is generated, so it is ignored above).
   {
     extends: [json.configs.recommended],
     files: ["**/*.json"],
     language: "json/json",
   },
 
-  // YAML: data files and GitHub workflows.
   {
     extends: [yml.configs["flat/standard"], yml.configs["flat/prettier"]],
     files: ["**/*.yaml", "**/*.yml"],
+    plugins: { project },
+    rules: { "project/no-comments": "error" },
   },
 ]);
