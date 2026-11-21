@@ -1,34 +1,44 @@
-(function () {
-  var root = document.documentElement;
-  var button = document.querySelector("[data-theme-toggle]");
-  if (!button) return;
+(function initThemeToggle() {
+  "use strict";
 
-  function current() {
-    return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-  }
-
-  function sync() {
-    button.setAttribute("aria-pressed", current() === "dark" ? "true" : "false");
-  }
-
-  button.addEventListener("click", function () {
-    var next = current() === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    try { localStorage.setItem("theme", next); } catch (e) {}
-    sync();
-  });
-
-  if (window.matchMedia) {
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
-      var saved;
-      try { saved = localStorage.getItem("theme"); } catch (err) {}
-      if (saved !== "light" && saved !== "dark") {
-        root.setAttribute("data-theme", e.matches ? "dark" : "light");
-        sync();
+  var button = document.querySelector("[data-theme-toggle]"),
+    currentTheme = function currentTheme() {
+      return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    },
+    markPressed = function markPressed() {
+      button.setAttribute("aria-pressed", currentTheme() === "dark" ? "true" : "false");
+    },
+    onSystemThemeChange = function onSystemThemeChange(event) {
+      var saved = "";
+      try {
+        saved = localStorage.getItem("theme");
+      } catch (error) {}
+      if (saved === "light" || saved === "dark") {
+        return;
       }
-    });
-  }
+      document.documentElement.dataset.theme = event.matches ? "dark" : "light";
+      markPressed();
+    },
+    onToggleClick = function onToggleClick() {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (error) {}
+      markPressed();
+    };
 
-  sync();
-  if (document.prerendering) document.addEventListener("prerenderingchange", sync, { once: true });
+  if (!button) {
+    return;
+  }
+  button.addEventListener("click", onToggleClick);
+  if (window.matchMedia) {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", onSystemThemeChange);
+  }
+  markPressed();
+  if (document.prerendering) {
+    document.addEventListener("prerenderingchange", markPressed, { once: true });
+  }
 })();

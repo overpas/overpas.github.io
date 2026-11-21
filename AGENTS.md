@@ -36,7 +36,8 @@
 - At the end commit all the work. Keep the branch and report its name. Do not merge it, unless the
   user calls the branch-merging skill.
 - Fixes, corrections, improvements belong in the same branch.
-- Push only when the user asks. A push to `main` deploys the site to GitHub Pages.
+- At the end push the branch and open a pull request to the base branch. Never push to `main`;
+  a push to `main` deploys the site to GitHub Pages.
 
 ## Verification
 

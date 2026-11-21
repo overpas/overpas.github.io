@@ -7,7 +7,7 @@ permalink: /blog/
 <section class="page-intro">
   <h1 class="page-title">Writing</h1>
   <p class="lede">{{ site.blogIntro }}</p>
-  <a class="accent-link" href="/feed.xml" style="align-self: flex-start; font-size: 15px">{{ icon("rss", 16) }}RSS feed</a>
+  <a class="accent-link accent-link--small" href="/feed.xml">{{ icon("rss", 16) }}RSS feed</a>
 </section>
 
 {%- for group in collections.posts | groupByYear %}

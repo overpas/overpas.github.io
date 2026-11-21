@@ -1,0 +1,37 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
+  "reportDescriptionlessDisables": true,
+  "reportInvalidScopeDisables": true,
+  "reportNeedlessDisables": true,
+  "rules": {
+    "color-named": "never",
+    "declaration-no-important": true,
+    "max-nesting-depth": 0,
+    "selector-max-id": 0,
+    "selector-max-universal": 1,
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": ["attribute"]
+      }
+    ],
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+      {
+        "message": "Expected class selector \"%s\" to be kebab-case BEM (block__element--modifier)"
+      }
+    ],
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["-webkit-text-size-adjust"]
+      }
+    ],
+    "comment-word-disallowed-list": [
+      ["/./"],
+      {
+        "message": "Comments are not allowed in this project."
+      }
+    ]
+  }
+}
