@@ -1,0 +1,8 @@
+{
+  "config": {
+    "default": true,
+    "extends": "markdownlint/style/prettier",
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "_site/**", "AGENTS.md", "CLAUDE.md", ".claude/**"],
+}

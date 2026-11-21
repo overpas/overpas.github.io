@@ -1,84 +1,95 @@
-import yaml from "js-yaml";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import yaml from "js-yaml";
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const pad = (n) => String(n).padStart(2, "0");
-const toDate = (value) => (value instanceof Date ? value : new Date(value));
+const WORDS_PER_MINUTE = 220;
+const HOME_PAGE_PROJECTS = 3;
+const ISO_DATE_LENGTH = 10;
+const UNORDERED = Number.MAX_SAFE_INTEGER;
 
-export default function (eleventyConfig) {
-  eleventyConfig.addPlugin(pluginRss);
+const monthDayFormat = new Intl.DateTimeFormat("en-US", {
+  day: "2-digit",
+  month: "short",
+  timeZone: "UTC",
+});
+const longDateFormat = new Intl.DateTimeFormat("en-US", {
+  day: "numeric",
+  month: "short",
+  timeZone: "UTC",
+  year: "numeric",
+});
+const currentYearFormat = new Intl.DateTimeFormat("en-US", { year: "numeric" });
 
-  eleventyConfig.addDataExtension("yaml,yml", (contents) => yaml.load(contents));
+const newestFirst = (first, second) => second.date.getTime() - first.date.getTime();
 
-  eleventyConfig.addPassthroughCopy("src/css");
-  eleventyConfig.addPassthroughCopy("src/js");
-  eleventyConfig.addPassthroughCopy("src/assets");
+const newestYearThenOrder = (first, second) => {
+  const byYear = (Number(second.data.year) || 0) - (Number(first.data.year) || 0);
+  const byOrder = (first.data.order ?? UNORDERED) - (second.data.order ?? UNORDERED);
+  return byYear || byOrder || String(first.data.title).localeCompare(String(second.data.title));
+};
 
-  eleventyConfig.addCollection("posts", (api) =>
-    api
-      .getFilteredByGlob("src/blog/*.md")
-      .filter((item) => !item.data.draft)
-      .sort((a, b) => b.date - a.date)
-  );
+const parseYaml = (contents) => yaml.load(contents);
 
-  eleventyConfig.addCollection("projects", (api) =>
-    api
-      .getFilteredByGlob("src/projects/*.md")
-      .filter((item) => !item.data.draft)
-      .sort(
-        (a, b) =>
-          (Number(b.data.year) || 0) - (Number(a.data.year) || 0) ||
-          (a.data.order ?? 999) - (b.data.order ?? 999) ||
-          String(a.data.title).localeCompare(String(b.data.title))
-      )
-  );
+const collections = {
+  posts: (api) => {
+    const published = api.getFilteredByGlob("src/blog/*.md").filter((item) => !item.data.draft);
+    return published.toSorted(newestFirst);
+  },
 
-  eleventyConfig.addFilter("isoDate", (d) => {
-    const x = toDate(d);
-    return `${x.getUTCFullYear()}-${pad(x.getUTCMonth() + 1)}-${pad(x.getUTCDate())}`;
-  });
-  eleventyConfig.addFilter("monthDay", (d) => {
-    const x = toDate(d);
-    return `${MONTHS[x.getUTCMonth()]} ${pad(x.getUTCDate())}`;
-  });
-  eleventyConfig.addFilter("longDate", (d) => {
-    const x = toDate(d);
-    return `${MONTHS[x.getUTCMonth()]} ${x.getUTCDate()}, ${x.getUTCFullYear()}`;
-  });
-  eleventyConfig.addFilter("year", (d) => toDate(d).getUTCFullYear());
+  projects: (api) => {
+    const published = api.getFilteredByGlob("src/projects/*.md").filter((item) => !item.data.draft);
+    return published.toSorted(newestYearThenOrder);
+  },
+};
 
-  eleventyConfig.addFilter("readingTime", (html) => {
-    const words = String(html || "")
-      .replace(/<[^>]*>/g, " ")
-      .split(/\s+/)
+const filters = {
+  featuredProjects: (items = [], count = HOME_PAGE_PROJECTS) => {
+    const featured = items.filter((project) => project.data.featured);
+    return (featured.length > 0 ? featured : items).slice(0, count);
+  },
+
+  groupByYear: (items = []) => {
+    const byYear = Map.groupBy(items, (item) => item.date.getUTCFullYear());
+    return Array.from(byYear, ([year, yearItems]) => ({ items: yearItems, year }));
+  },
+
+  head: (items = [], count = Infinity) => items.slice(0, count),
+
+  isoDate: (date) => date.toISOString().slice(0, ISO_DATE_LENGTH),
+
+  longDate: (date) => longDateFormat.format(date),
+
+  monthDay: (date) => monthDayFormat.format(date),
+
+  readingTime: (html = "") => {
+    const words = String(html)
+      .replaceAll(/<[^>]*>/gu, " ")
+      .split(/\s+/u)
       .filter(Boolean).length;
-    return Math.max(1, Math.round(words / 220));
-  });
+    return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+  },
 
-  eleventyConfig.addFilter("groupByYear", (items) => {
-    const groups = [];
-    for (const item of items || []) {
-      const year = toDate(item.date).getUTCFullYear();
-      let group = groups.find((g) => g.year === year);
-      if (!group) groups.push((group = { year, items: [] }));
-      group.items.push(item);
-    }
-    return groups;
-  });
+  year: (date) => date.getUTCFullYear(),
+};
 
-  eleventyConfig.addFilter("head", (items, n) => (items || []).slice(0, n));
+export default function configureEleventy(eleventyConfig) {
+  eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addDataExtension("yaml,yml", parseYaml);
 
-  eleventyConfig.addFilter("featuredProjects", (items, n = 3) => {
-    const featured = (items || []).filter((p) => p.data.featured);
-    return (featured.length ? featured : items || []).slice(0, n);
-  });
-
-  eleventyConfig.addShortcode("currentYear", () => String(new Date().getFullYear()));
+  for (const directory of ["src/css", "src/js", "src/assets"]) {
+    eleventyConfig.addPassthroughCopy(directory);
+  }
+  for (const [name, collection] of Object.entries(collections)) {
+    eleventyConfig.addCollection(name, collection);
+  }
+  for (const [name, filter] of Object.entries(filters)) {
+    eleventyConfig.addFilter(name, filter);
+  }
+  eleventyConfig.addShortcode("currentYear", () => currentYearFormat.format());
 
   return {
-    dir: { input: "src", output: "_site", includes: "_includes", data: "_data" },
-    markdownTemplateEngine: false,
+    dir: { data: "_data", includes: "_includes", input: "src", output: "_site" },
     htmlTemplateEngine: "njk",
+    markdownTemplateEngine: false,
     templateFormats: ["md", "njk", "html"],
   };
 }
