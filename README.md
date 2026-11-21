@@ -84,12 +84,3 @@ npm start
 
 Then open http://localhost:8080. The page reloads when you save a file.
 `npm run build` writes the finished site to `_site/`.
-
-## Publish on GitHub Pages (once)
-
-1. Create a repository named `<your-username>.github.io` on GitHub and push this folder to its `main` branch.
-2. In the repository, open **Settings → Pages** and set **Source** to **GitHub Actions**.
-3. Set `url` in `src/_data/site.yaml` to `https://<your-username>.github.io` (or your custom domain).
-
-After that, each push to `main` deploys automatically; progress shows under the **Actions** tab.
-For a custom domain, add it under Settings → Pages and point your DNS at GitHub.
