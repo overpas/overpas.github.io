@@ -58,6 +58,18 @@ All personal content is in `[square-bracket placeholders]`:
 | Placeholder posts and projects | delete the `placeholder-*` files in `src/blog/` and `src/projects/` |
 | Favicon (the "Y" monogram) | `src/assets/favicon.svg` |
 
+Notes on the data files:
+
+- `url` in `site.yaml` is the full URL of the published site with no trailing slash. The RSS feed
+  and link previews use it.
+- `now` rows in `site.yaml` can be added, removed or reordered freely.
+- `socials` in `site.yaml` are the header icon links. `icon` is one of `linkedin`, `github`,
+  `telegram`, `x`, `link`. Delete a row to hide that icon.
+- `email` in `site.yaml` shows as the envelope icon. Set it to `""` to hide it.
+- `pdf` in `cv.yaml` is the path of the CV PDF. Set it to `""` to hide the Download button.
+- `experience` in `cv.yaml` is newest first. Leave `end` out for the current job, which then
+  shows "Present".
+
 Colors and type live at the top of `src/css/style.css`.
 
 ## Preview locally

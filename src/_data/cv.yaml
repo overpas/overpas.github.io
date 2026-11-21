@@ -1,11 +1,7 @@
-# Content of the CV page. Name, role and location come from site.yaml.
-
-# Put your PDF at src/assets/cv.pdf. Set to "" to hide the Download button.
 pdf: "/assets/cv.pdf"
 
 summary: "[Two or three sentences: what you do, how many years you’ve done it, and the kind of problems you’re best at.]"
 
-# Newest first. Leave `end` out for your current job (shows "Present").
 experience:
   - title: "[Job title]"
     company: "[Company]"
