@@ -49,6 +49,7 @@ jobs:
           args: >-
             --offline
             --include-fragments
+            --index-files index.html
             --no-progress
             --root-dir "${{ github.workspace }}/_site"
             "_site/**/*.html"
