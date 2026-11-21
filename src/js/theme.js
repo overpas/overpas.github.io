@@ -33,4 +33,5 @@
   }
 
   sync();
+  if (document.prerendering) document.addEventListener("prerenderingchange", sync, { once: true });
 })();
