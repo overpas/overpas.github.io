@@ -22,13 +22,25 @@
 <meta name="color-scheme" content="light dark">
 <script>
   (function () {
-    var t;
-    try { t = localStorage.getItem("theme"); } catch (e) {}
-    if (t !== "light" && t !== "dark") {
-      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    function apply() {
+      var t;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
     }
-    document.documentElement.setAttribute("data-theme", t);
+    apply();
+    if (document.prerendering) document.addEventListener("prerenderingchange", apply, { once: true });
   })();
+</script>
+<script type="speculationrules">
+{
+  "prerender": [{
+    "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/feed.xml" } }] },
+    "eagerness": "moderate"
+  }]
+}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
