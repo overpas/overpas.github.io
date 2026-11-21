@@ -47,6 +47,17 @@
   }
 }
 
+@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 120ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 html { -webkit-text-size-adjust: 100%; }
@@ -107,6 +118,7 @@ img, svg { max-width: 100%; }
   justify-content: space-between;
   gap: 8px 32px;
   padding-top: 28px;
+  view-transition-name: site-header;
 }
 
 .site-nav {
