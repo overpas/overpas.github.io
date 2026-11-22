@@ -41,12 +41,16 @@
 
 ## Verification
 
-### L1: Build
+### L1: Build and lint
 
 ```shell
 npm ci # once per new worktree, node_modules is not shared
-npm run build # must finish with no errors and no warnings
+npm run check # lint, build, HTML validation; must finish with no errors and no warnings
 ```
+
+- Use `npm run fix` for errors that can be fixed automatically. Do not skip the pre-commit hook.
+- CI also checks internal links and anchors in the built site, and the workflow files. Run these
+  checks locally only if `lychee` or `actionlint` is installed.
 
 ### L2: Browser check
 
