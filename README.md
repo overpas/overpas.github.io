@@ -110,12 +110,3 @@ CI also checks internal links and `#anchors` in the built site (lychee) and the 
 
 A pre-commit hook, installed by `npm install`, lints and formats the files you stage. To skip it
 once, run `SKIP_SIMPLE_GIT_HOOKS=1 git commit ...`.
-
-## Publish on GitHub Pages (once)
-
-1. Create a repository named `<your-username>.github.io` on GitHub and push this folder to its `main` branch.
-2. In the repository, open **Settings → Pages** and set **Source** to **GitHub Actions**.
-3. Set `url` in `src/_data/site.yaml` to `https://<your-username>.github.io` (or your custom domain).
-
-After that, each push to `main` deploys automatically; progress shows under the **Actions** tab.
-For a custom domain, add it under Settings → Pages and point your DNS at GitHub.
