@@ -340,37 +340,6 @@ svg {
   letter-spacing: -0.025em;
 }
 
-.now .label {
-  margin-bottom: 20px;
-}
-
-.now-list {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  border-top: 1px solid var(--rule);
-}
-
-.now-list > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 24px;
-  padding: 16px 0;
-  font-size: 15px;
-  line-height: 1.55;
-  border-bottom: 1px solid var(--rule);
-}
-
-.now-list dt {
-  flex: 0 0 140px;
-  color: var(--muted);
-}
-
-.now-list dd {
-  flex: 1 1 320px;
-  margin: 0;
-}
-
 .project-row {
   display: flex;
   flex-wrap: wrap;
