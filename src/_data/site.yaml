@@ -1,12 +1,12 @@
 url: "https://your-handle.github.io"
 lang: en
 
-name: "[Your Name]"
-role: "[your role]"
+name: Pavel Shurmilau
+role: "Software Engineer, Android"
 location: "[City, Country]"
 description: "[One sentence that describes you, used by search engines and link previews.]"
 
-headline: "I’m [Your Name], a [your role] based in [City]."
+headline: "I’m Pavel Shurmilau, I build software: mobile apps, libraries, tools and what not"
 intro: "[Two or three sentences about what you work on, what you care about, and what you’re open to right now.]"
 
 now:
@@ -23,12 +23,12 @@ blogIntro: "[What you write about: notes on your work, things you learned, longe
 socials:
   - label: LinkedIn
     icon: linkedin
-    url: "https://www.linkedin.com/in/your-handle"
+    url: "https://www.linkedin.com/in/pavel-shurmilau-45b794178/"
   - label: GitHub
     icon: github
-    url: "https://github.com/your-handle"
+    url: "https://github.com/overpas"
   - label: Telegram
     icon: telegram
-    url: "https://t.me/your-handle"
+    url: "https://t.me/Spookie_boogy"
 
-email: you@example.com
+email: pckeycalculator@gmail.com
