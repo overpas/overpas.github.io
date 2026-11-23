@@ -6,19 +6,10 @@ role: "Software Engineer, Android"
 location: "[City, Country]"
 description: "[One sentence that describes you, used by search engines and link previews.]"
 
-headline: "I’m Pavel Shurmilau, I build software: mobile apps, libraries, tools and what not"
-intro: "[Two or three sentences about what you work on, what you care about, and what you’re open to right now.]"
+headline: I’m Pavel Shurmilau
+intro: "I build software: mobile apps, libraries, tools and what not."
 
-now:
-  - label: Currently
-    value: "[Role] at [Company]"
-  - label: Focus
-    value: "[What you’re building or learning these days]"
-  - label: Based in
-    value: "[City, Country]"
-
-projectsIntro: "[A sentence on the kind of things you build and why.]"
-blogIntro: "[What you write about: notes on your work, things you learned, longer essays.]"
+blogIntro: My thoughts on software, its development and future
 
 socials:
   - label: LinkedIn

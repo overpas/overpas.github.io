@@ -5,8 +5,10 @@ permalink: /blog/
 ---
 {%- from "icons.njk" import icon -%}
 <section class="page-intro">
-  <h1 class="page-title">Writing</h1>
+  <h1 class="page-title">Articles</h1>
+  {%- if site.blogIntro %}
   <p class="lede">{{ site.blogIntro }}</p>
+  {%- endif %}
   <a class="accent-link accent-link--small" href="/feed.xml">{{ icon("rss", 16) }}RSS feed</a>
 </section>
 

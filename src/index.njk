@@ -1,30 +1,22 @@
 ---
 layout: base.njk
 ---
+{% set selected = collections.projects | featuredProjects(3) %}
+{% set latest = collections.posts | head(3) %}
 <section class="hero">
   <h1>{{ site.headline }}</h1>
   <p class="lede">{{ site.intro }}</p>
   <div class="link-row">
     <a class="accent-link" href="/cv/">Read my CV →</a>
+    {%- if collections.projects.length %}
     <a class="accent-link" href="/projects/">See projects →</a>
+    {%- endif %}
+    {%- if latest.length %}
+    <a class="accent-link" href="/blog/">See articles →</a>
+    {%- endif %}
   </div>
 </section>
 
-{% if site.now and site.now.length %}
-<section class="section now" aria-labelledby="now">
-  <h2 id="now" class="label">Now</h2>
-  <dl class="now-list">
-    {%- for item in site.now %}
-    <div>
-      <dt>{{ item.label }}</dt>
-      <dd>{{ item.value }}</dd>
-    </div>
-    {%- endfor %}
-  </dl>
-</section>
-{% endif %}
-
-{% set selected = collections.projects | featuredProjects(3) %}
 {% if selected.length %}
 <section class="section" aria-labelledby="sel-projects">
   <div class="section-head">
@@ -45,11 +37,10 @@ layout: base.njk
 </section>
 {% endif %}
 
-{% set latest = collections.posts | head(3) %}
 {% if latest.length %}
 <section class="section" aria-labelledby="latest">
   <div class="section-head">
-    <h2 id="latest" class="label">Latest writing</h2>
+    <h2 id="latest" class="label">Latest articles</h2>
     <a href="/blog/">All posts →</a>
   </div>
   <div class="rows">

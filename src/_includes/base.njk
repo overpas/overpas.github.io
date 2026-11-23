@@ -47,8 +47,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="alternate" type="application/rss+xml" title="{{ site.name }} — Writing" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }} — Articles" href="/feed.xml">
 <script src="/js/theme.js" defer></script>
+<script src="/js/back-to-top.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -87,7 +88,7 @@
 
 <footer class="site-footer">
   <span>© {% currentYear %} {{ site.name }}</span>
-  <a href="#top">Back to top ↑</a>
+  <a href="#top" data-back-to-top hidden>Back to top ↑</a>
 </footer>
 
 </div>
