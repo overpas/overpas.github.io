@@ -6,7 +6,9 @@ permalink: /projects/
 {%- from "icons.njk" import icon -%}
 <section class="page-intro">
   <h1 class="page-title">Projects</h1>
+  {%- if site.projectsIntro %}
   <p class="lede">{{ site.projectsIntro }}</p>
+  {%- endif %}
 </section>
 
 <div class="rows project-list">
