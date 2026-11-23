@@ -69,6 +69,9 @@ Notes on the data files:
 - `pdf` in `cv.yaml` is the path of the CV PDF. Set it to `""` to hide the Download button.
 - `experience` in `cv.yaml` is newest first. Leave `end` out for the current job, which then
   shows "Present".
+- Each `experience` entry can list `projects`. A project has `name`, and optional `url`,
+  `description`, `dates` (free text), `role`, `tech` and `highlights`.
+- `projects` in `cv.yaml` are the personal projects: `name`, optional `url` and `description`.
 
 Colors and type live at the top of `src/css/style.css`.
 

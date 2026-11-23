@@ -794,6 +794,28 @@ svg {
   color: var(--accent);
 }
 
+.cv-item__title a,
+.cv-project__title a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.cv-project {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 16px;
+  margin-top: 12px;
+  border-left: 2px solid var(--rule);
+}
+
+.cv-project__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .cv-item__dates {
   font-family: var(--mono);
   font-size: 13px;
@@ -812,7 +834,7 @@ svg {
   color: var(--body);
 }
 
-.cv-item ul {
+.cv-item__list {
   display: flex;
   flex-direction: column;
   gap: 6px;
