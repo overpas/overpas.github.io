@@ -1,49 +1,154 @@
 pdf: ""
 
-summary: "[Two or three sentences: what you do, how many years you’ve done it, and the kind of problems you’re best at.]"
+summary: "Developing robust and feature-rich Android software for 7+ years, including apps with 50M+ Android installs and 40M+ MAU on all platforms. Familiar with the whole mobile SDLC: from gathering requirements from product owners to developing business features, publishing and working on platform stuff. Value strong engineering culture and well-established processes."
 
 experience:
-  - title: "[Job title]"
-    company: "[Company]"
-    start: "[MMM YYYY]"
-    location: "[City or Remote]"
-    highlights:
-      - "[Key achievement, ideally with a measurable result]"
-      - "[A project you led or owned end to end]"
-      - "[Scope: team size, systems, or users you were responsible for]"
-  - title: "[Job title]"
-    company: "[Company]"
-    start: "[MMM YYYY]"
-    end: "[MMM YYYY]"
-    location: "[City or Remote]"
-    highlights:
-      - "[Key achievement, ideally with a measurable result]"
-      - "[A project you led or owned end to end]"
-  - title: "[Job title]"
-    company: "[Company]"
-    start: "[MMM YYYY]"
-    end: "[MMM YYYY]"
-    location: "[City or Remote]"
-    highlights:
-      - "[Key achievement, ideally with a measurable result]"
-      - "[A project you led or owned end to end]"
+  - company: Owner.one
+    url: "https://www.linkedin.com/company/owner-one/"
+    start: Sep 2024
+    projects:
+      - name: Owner.one App
+        url: "https://play.google.com/store/apps/details?id=one.owner.app.android&hl=en"
+        description: "Wealth transfer system, helping clients to save up to $10k per month on family banks"
+        tech:
+          [Kotlin, MVVM, Jetpack Compose, Compose Navigation, Retrofit, Couchbase Lite, multimodule]
+        highlights:
+          - "Developed in-app chat, enabling communication and file exchange using API, WebSockets, and 2-way paging"
+          - "Developed a high-level server-driven UI framework to speed up development of long forms by up to 50% and achieve better sync across Android and iOS by reusing 30+ forms"
+          - Introduced weekly Android tech meetings to align architecture decisions and prioritize technical debt
+          - Identified and documented around 20 common code anti-patterns to reduce code review churn
+          - "Proposed architecture guidelines that drove refactoring of ~60% of the monolithic codebase into a modular one (100+ modules)"
+          - "Integrated Detekt static analysis with custom rules, reducing code review time by ~30% and enforcing style standards"
+          - "Developed core assets and transfer algorithms features, enabling users to manage assets, activate and test transfer scenarios"
+          - "Implemented 2-layer data encryption, ensuring client data security"
+          - "Integrated crash reporting, decreasing MTTR by up to 5 times"
+          - "Integrated push notifications, boosting user engagement"
+  - company: ScienceSoft
+    url: "https://www.linkedin.com/company/sciencesoft/"
+    start: Jan 2022
+    end: Aug 2024
+    projects:
+      - name: Oxygen
+        url: "https://web.archive.org/web/20231201211341/https://play.google.com/store/apps/details?id=com.oxygenbank"
+        description: "A US fintech app, 1M+ downloads"
+        dates: Jan 2023 – Mar 2024
+        role: Subcontractor
+        tech: [Kotlin, MVVM, Clean Architecture, Hilt, Coroutines, Retrofit, multimodule]
+        highlights:
+          - "Integrated Lokalise SDK to support 20+ languages, increasing text changes TTM by up to 20 times"
+          - "Synced texts between Android and iOS platforms, decreasing string resources discrepancy by ~50%"
+          - Migrated from 4-digit MFA codes to 6-digit MFA codes to increase the app’s security
+          - "Implemented 10+ experiments related to transfer limits"
+          - Updated transfer limits UI to display more detailed information
+          - "Added swappable test env URLs to debug menu, making QA builds more configurable, speeding up QA process by ~15%"
+          - "Actualized the tech stack by refactoring 20+ modules from RxJava to Coroutines and MVP to MVVM"
+          - Assured OWASP level 1 security for the codebase
+      - name: Flo Period Tracker
+        url: "https://play.google.com/store/apps/details?id=org.iggymedia.periodtracker&hl=en"
+        description: "#1 world period tracker, 50M+ Google Play downloads, 40M+ MAU on all platforms"
+        dates: Jan 2022 – Dec 2022
+        role: Subcontractor
+        tech: [Kotlin, Java, MVVM, MVP, Dagger 2, Coroutines, RxJava, Retrofit, Room, multimodule]
+        highlights:
+          - "Refactored colors usage to color tokens and text styles usage to typography tokens, ensuring adherence to design system and increasing minor design system updates TTM by up to 10 times"
+          - "Created debug screens, showcasing design system components, reducing related manual UI testing time by ~5%"
+          - "Decoupled health data from PII, enabling implementation of a major anonymisation feature"
+          - "Integrated downloadable fonts, allowing designers to experiment with different typefaces and styles independently"
+          - "Collected accessibility services usage data, helping to build the app’s accessibility strategy"
+  - company: Touchlane
+    url: "https://www.linkedin.com/company/touchlane/"
+    start: Aug 2019
+    end: Dec 2021
+    projects:
+      - name: OmaMobiili
+        url: "https://play.google.com/store/apps/details?id=fi.omasp.mobile.bank"
+        description: A banking app in Finland
+        dates: Nov 2019 – Aug 2020, Jan 2021 – Dec 2021
+        tech: [Java, MVP, Dagger, RxJava, Retrofit, Gson, Twine]
+        highlights:
+          - "Implemented investments feature, allowing users to use investment instruments within the app"
+          - "Implemented wealth tracking feature, helping users input and track their assets"
+          - "Assured app accessibility, complying with EU guidelines for banking apps"
+          - "Added response results caching and delayed unneeded calls, reducing front page API calls by ~40%"
+          - "Implemented in-app PDF invoice preview feature, increasing user engagement"
+          - "Increased unit test coverage from 29% to 40%"
+          - "Introduced Robolectric-based pseudo UI tests, preventing regression of most complex UI user scenarios"
+          - "Added dependency audit to CI pipeline, ensuring better app security"
+          - "Created IDE templates, speeding up development of new features by 1-10%, depending on the scale"
+      - name: SunGo
+        url: "https://www.facebook.com/sungoapp/"
+        description: A promo campaign app
+        dates: Sep 2020 – Dec 2020
+        tech: [Kotlin, MVVM, Jetpack Navigation, LiveData, Retrofit, OkHttp, Gson, Firebase]
+        highlights:
+          - "Re-created the app from scratch, creating login, sign up, maps browsing, QR code scanning, scoreboard features"
+          - "Migrated from Firebase to a dedicated backend, reducing potential costs by ~50%"
+  - company: Exadel
+    url: "https://www.linkedin.com/company/exadel/"
+    start: Jul 2018
+    end: Jul 2019
+    projects:
+      - name: Curb Driver
+        url: "https://play.google.com/store/apps/details?id=com.verifone.curb.driver"
+        description: A taxi app for drivers
+        dates: Sep 2018 – Jul 2019
+        tech:
+          - Java
+          - Kotlin
+          - MVC
+          - Services
+          - Receivers
+          - Retrofit
+          - OkHttp
+          - Gson
+          - Room
+          - LiveData
+          - Mapbox SDK
+
+        highlights:
+          - "Fixed 20+ bugs with incoming message processing"
+          - "Developed 3+ custom UI components"
+          - Improved interaction with a third-party payment app
+      - name: Exadel rVision
+        description: A staff management app
+        dates: Jul 2018 – Sep 2018
+        tech: [Kotlin, MVVM, Room, LiveData, Retrofit, OkHttp, Gson]
+        highlights:
+          - "Refactored the app, integrating Kotlin, Jetpack libraries like ViewModel, Room and LiveData"
+          - "Offloaded indexes creation, decreasing initial database insert time by roughly 2 times"
+
+projects:
+  - name: compose-treemap-chart
+    url: "https://github.com/overpas/compose-treemap-chart"
+    description: A Kotlin Multiplatform UI library for Compose Multiplatform for displaying treemap charts
+  - name: svg-to-compose-intellij
+    url: "https://github.com/overpas/svg-to-compose-intellij"
+    description: An IntelliJ IDEA and Android Studio plugin that generates and previews Compose ImageVector from SVG and Android XML icons
 
 education:
-  - degree: "[Degree], [Field of study]"
-    school: "[University]"
-    start: "[YYYY]"
-    end: "[YYYY]"
+  - degree: "Master’s degree, Engineering"
+    school: Belarusian State University of Informatics and Radioelectronics
 
 skills:
-  - area: "[Area]"
-    items: ["[Skill]", "[Skill]", "[Skill]"]
-  - area: "[Area]"
-    items: ["[Skill]", "[Skill]", "[Skill]"]
-  - area: "[Area]"
-    items: ["[Skill]", "[Skill]", "[Skill]"]
+  - area: Core
+    items: [Kotlin, Java, Android SDK, Kotlin Multiplatform]
+  - area: UI
+    items: [Jetpack Compose, Jetpack libraries]
+  - area: Async
+    items: [Kotlin Coroutines, RxJava]
+  - area: DI
+    items: [Dagger, Koin]
+  - area: Data
+    items: [Retrofit/OkHttp, Gson, SQLite, Room, SQLDelight, Firebase]
+  - area: Architecture
+    items: [Clean Architecture, MVVM, MVP, UDF, GoF]
+  - area: Testing
+    items: [JUnit, Mocking, Robolectric, Espresso]
+  - area: Tooling
+    items: [Gradle, KSP, Detekt, IntelliJ plugins, AI-assisted engineering]
 
 languages:
-  - language: "[Language]"
-    level: "[Native / Fluent / B2…]"
-  - language: "[Language]"
-    level: "[Native / Fluent / B2…]"
+  - language: Russian
+    level: Native
+  - language: English
+    level: Upper-intermediate

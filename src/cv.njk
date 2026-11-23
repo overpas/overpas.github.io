@@ -30,16 +30,51 @@ permalink: /cv/
     {%- for job in cv.experience %}
     <article class="cv-item">
       <div class="cv-item__top">
-        <h3 class="cv-item__title">{{ job.title }} · <span class="cv-item__org">{{ job.company }}</span></h3>
+        <h3 class="cv-item__title">{% if job.title %}{{ job.title }} · {% endif %}<span class="cv-item__org">{% if job.url %}<a href="{{ job.url }}">{{ job.company }}</a>{% else %}{{ job.company }}{% endif %}</span></h3>
         <span class="cv-item__dates">{{ job.start }} – {{ job.end or "Present" }}</span>
       </div>
       {%- if job.location %}<p class="cv-item__where">{{ job.location }}</p>{% endif %}
       {%- if job.highlights and job.highlights.length %}
-      <ul>
+      <ul class="cv-item__list">
         {%- for h in job.highlights %}<li>{{ h }}</li>{% endfor %}
       </ul>
       {%- endif %}
+      {%- for p in job.projects %}
+      <section class="cv-project">
+        <div class="cv-item__top">
+          <h4 class="cv-project__title">{% if p.url %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h4>
+          {%- if p.dates %}<span class="cv-item__dates">{{ p.dates }}</span>{% endif %}
+        </div>
+        {%- if p.description or p.role %}
+        <p class="cv-item__where">{{ p.description }}{% if p.description and p.role %} · {% endif %}{{ p.role }}</p>
+        {%- endif %}
+        {%- if p.tech and p.tech.length %}
+        <ul class="chips" aria-label="Tech stack">
+          {%- for t in p.tech %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        {%- endif %}
+        {%- if p.highlights and p.highlights.length %}
+        <ul class="cv-item__list">
+          {%- for h in p.highlights %}<li>{{ h }}</li>{% endfor %}
+        </ul>
+        {%- endif %}
+      </section>
+      {%- endfor %}
     </article>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if cv.projects and cv.projects.length %}
+<section class="cv-section" aria-labelledby="cv-projects">
+  <h2 id="cv-projects" class="label">Personal projects</h2>
+  <div class="cv-section__body cv-edu">
+    {%- for p in cv.projects %}
+    <div class="cv-item">
+      <h3 class="cv-item__title">{% if p.url %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
+      {%- if p.description %}<p class="cv-item__school">{{ p.description }}</p>{% endif %}
+    </div>
     {%- endfor %}
   </div>
 </section>
@@ -53,7 +88,7 @@ permalink: /cv/
     <div class="cv-item">
       <div class="cv-item__top">
         <h3 class="cv-item__title">{{ e.degree }}</h3>
-        <span class="cv-item__dates">{{ e.start }} – {{ e.end }}</span>
+        {%- if e.start or e.end %}<span class="cv-item__dates">{{ e.start }} – {{ e.end }}</span>{% endif %}
       </div>
       <p class="cv-item__school">{{ e.school }}</p>
     </div>
